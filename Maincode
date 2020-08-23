@@ -1,0 +1,80 @@
+#include <Thermistor.h>
+Thermistor temp(0);
+int num_Measure = 128 ; // Set the number of measurements   
+int pinSignal = A0; // pin connected to pin O module sound sensor  
+int redLed = 5; 
+long Sound_signal;    // Store the value read Sound Sensor   
+long sum = 0 ; // Store the total value of n measurements   
+double level = 0 ; // Store the average value   
+
+const int trigPin = 9;
+const int echoPin = 10;
+// defines variables
+long duration;
+double distance;
+int counter =0;
+void setup ()  
+{   
+  
+  
+  pinMode(pinSignal,INPUT); // Set the signal pin as input   
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+  pinMode(echoPin, INPUT);
+  Serial.begin (9600); 
+
+}  
+   
+void loop ()  
+{  
+  // Performs 128 signal readings   
+
+  double temperature = int(temp.getTemp());
+   if (temperature>89.6){
+    counter++;
+   }
+  for ( int i = 0 ; i <num_Measure; i ++)  
+  {  
+   Sound_signal = analogRead (pinSignal);  
+    sum =sum + Sound_signal;  
+  }  
+  level = sum / num_Measure; // Calculate the average value   
+  sum = 0 ; // Reset the sum of the measurement values  
+  delay(200);
+
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+// Sets the trigPin on HIGH state for 10 micro seconds
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+// Reads the echoPin, returns the sound wave travel time in microseconds
+duration = pulseIn(echoPin, HIGH);
+// Calculating the distance
+distance1= duration*0.034/2;
+delay(2500);//time between exhale and inhale
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+duration = pulseIn(echoPin, HIGH);
+distance2= duration*0.034/2;
+distance=distance2-distance1;
+Serial.print("temperature:");
+Serial.println(temperature);
+Serial.println("sound:");
+Serial.println(level);
+Serial.print("dB");
+Serial.println("Expansion:");
+Serial.println(distance);
+Serial.println("")
+if((temperature>89.6 && level>5.70 && disstance>3.6))
+{print("100%")}
+else if ((temperature<89.6 && level>5.70 && disstance>3.6)||(temperature>89.6 && level<5.70 && disstance>3.6)||(temperature>89.6 && level>5.70 && disstance<3.6))
+{print("67.78%")}
+else if ((temperature<89.6 && level<5.70 && disstance>3.6)||(temperature>89.6 && level<5.70 && disstance<3.6)||(temperature<89.6 && level>5.70 && disstance<3.6))
+{print("33.33%")}
+else if ((temperature<89.6 && level<5.70 && disstance<3.6))
+{print("0%")}
+
+}
