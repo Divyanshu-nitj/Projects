@@ -1,0 +1,23 @@
+[
+{"type":"header","version":"5.0.2","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"roster"},
+{"type":"table","name":"User","database":"roster","data":
+[
+{"name":"Saffi","title":"si106","role":"1"},
+{"name":"Elspeth","title":"si106","role":"0"},
+{"name":"Gemmalea","title":"si106","role":"0"},
+{"name":"Genevieve","title":"si106","role":"0"},
+{"name":"Reis","title":"si106","role":"0"},
+{"name":"Eonan","title":"si110","role":"1"},
+{"name":"Angelic","title":"si110","role":"0"},
+{"name":"Luka","title":"si110","role":"0"},
+{"name":"Michee","title":"si110","role":"0"},
+{"name":"Orson","title":"si110","role":"0"},
+{"name":"Sophia","title":"si206","role":"1"},
+{"name":"Kelsi","title":"si206","role":"0"},
+{"name":"Kirsteen","title":"si206","role":"0"},
+{"name":"Leanne","title":"si206","role":"0"},
+{"name":"Presley","title":"si206","role":"0"}
+]
+}
+]
